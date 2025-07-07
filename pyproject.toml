@@ -1,5 +1,27 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+packaging_demo = ["*/*.json"]
+
+[project]
+name = "packaging-demo-hrutik"
+version = "0.0.1"
+authors = [{ name = "Author name", email = "some-email@gmail.com"}]
+description = "My package description"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["one", "two"]
+license = { text = "MIT" }
+classifiers = ["Programming Language :: Python :: 3"]
+dependencies = ["fastapi"]
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-cov"]
+release = ["twine", "build"]
+static-code-qa = ["pre-commit"]
+dev = ["packaging-demo-hrutik[test,release,static-code-qa]"]
 
 [tool.ruff.lint]
 # Never enforce `E501` (line length violations).
