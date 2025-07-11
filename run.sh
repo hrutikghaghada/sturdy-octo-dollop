@@ -1,10 +1,14 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-function load-dotenv {
+function try-load-dotenv {
+    if [ ! -f "$THIS_DIR/.env" ]; then
+        echo "no .env file found"
+        return 1
+    fi
     while read -r line; do
         export "$line"
     done < <(grep -v '^#' "$THIS_DIR/.env" | grep -v '^$')
@@ -17,6 +21,10 @@ function install {
 
 function lint {
     pre-commit run --all-files
+}
+
+function lint:ci {
+    SKIP=no-commit-to-branch pre-commit run --all-files
 }
 
 function build {
@@ -36,7 +44,7 @@ function release:prod {
 }
 
 function publish:test {
-    load-dotenv
+    try-load-dotenv || true
     twine upload dist/* \
         --repository testpypi \
         --username=__token__ \
@@ -44,7 +52,7 @@ function publish:test {
 }
 
 function publish:prod {
-    load-dotenv
+    try-load-dotenv || true
     twine upload dist/* \
         --repository pypi \
         --username=__token__ \
@@ -71,4 +79,4 @@ function help {
 }
 
 TIMEFORMAT="Task completed in %3lR"
-time ${@:-help} 
+time ${@:-help}
