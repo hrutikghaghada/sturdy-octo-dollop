@@ -7,7 +7,7 @@ packaging_demo = ["*/*.json"]
 
 [project]
 name = "packaging-demo-hrutik"
-version = "0.0.4"
+version = "0.0.5"
 authors = [{ name = "Author name", email = "some-email@gmail.com"}]
 description = "My package description"
 readme = "README.md"
