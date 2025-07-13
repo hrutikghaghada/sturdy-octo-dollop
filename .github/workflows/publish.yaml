@@ -88,4 +88,5 @@ jobs:
           PROD_PYPI_TOKEN: ${{ secrets.PROD_PYPI_TOKEN }}
       - name: Push Tags
         run: |
+          git tag $(cat version.txt)
           git push origin --tags
