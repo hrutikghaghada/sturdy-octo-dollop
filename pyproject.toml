@@ -7,7 +7,6 @@ packaging_demo = ["*/*.json"]
 
 [project]
 name = "packaging-demo-hrutik"
-version = "0.0.7"
 authors = [{ name = "Author name", email = "some-email@gmail.com"}]
 description = "My package description"
 readme = "README.md"
@@ -16,6 +15,10 @@ keywords = ["one", "two"]
 license = { text = "MIT" }
 classifiers = ["Programming Language :: Python :: 3"]
 dependencies = ["fastapi"]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = { file = "version.txt" }
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-cov"]
