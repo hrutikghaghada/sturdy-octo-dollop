@@ -85,7 +85,7 @@ jobs:
         run: |
           /bin/bash -x run.sh publish:prod
         env:
-          TEST_PYPI_TOKEN: ${{ secrets.PROD_PYPI_TOKEN }}
+          PROD_PYPI_TOKEN: ${{ secrets.PROD_PYPI_TOKEN }}
       - name: Push Tags
         run: |
           git push origin --tags
